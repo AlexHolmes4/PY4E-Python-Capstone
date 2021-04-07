@@ -1,4 +1,4 @@
-# Used a flat text file in format of mbox-short.txt 
+# Used a flat text file in format of mbox-short.txt
 fname = input("Enter file name: ")
 fh = open(fname,'r')
 count = None
