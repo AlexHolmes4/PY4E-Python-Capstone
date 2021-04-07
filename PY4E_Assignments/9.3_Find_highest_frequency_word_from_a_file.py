@@ -14,6 +14,7 @@ for line in handle:
 bigcount = None
 bigword = None
 #word is the key, count is the value; iteration through the dict()
+#loops through the dictionary thats been made into tuples,and runs a condition.
 for word,count in counts.items():
     if bigcount is None or count > bigcount:
         bigword = word
