@@ -6,4 +6,4 @@ import re
                               #extract and return as list for every match
                                         #match if a a numerical range of characters of any size
                                                     #get a string of the file
-print(sum([int(i) for i in re.findall('[0-9]+',(open("regex_sum_42.txt")).read())]))
+print(sum([int(i) for i in re.findall('[0-9]+',(open("regex_sum_1096068.txt")).read())]))
