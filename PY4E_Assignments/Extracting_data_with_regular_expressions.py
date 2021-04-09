@@ -2,7 +2,7 @@ import re
 intlist = list()
 
 fname = input("Enter File Name: ")
-#test file if len(fname) < 1 : fname = "regex_sum_42.txt"
+#test file : if len(fname) < 1 : fname = "regex_sum_42.txt"
 if len(fname) < 1 : fname = "regex_sum_1096068.txt"
 fhandle = open(fname)
 
