@@ -1,6 +1,8 @@
 # To run this, download the BeautifulSoup zip file
 # http://www.py4e.com/code3/bs4.zip
 # and unzip it in the same directory as this file
+#Sample data: http://py4e-data.dr-chuck.net/comments_42.html (Sum=2553)
+#Actual data: http://py4e-data.dr-chuck.net/comments_1096070.html (Sum ends with 32)
 
 from urllib.request import urlopen
 import re
@@ -15,7 +17,6 @@ ctx.verify_mode = ssl.CERT_NONE
 url = input('Enter - ')
 html = urlopen(url, context=ctx).read()
 soup = BeautifulSoup(html, "html.parser") #all the html cleaned up in class object BeautifulSoup
-
 tags = soup('span') #returns all the span classes #this object takes paramater of tags
 
 #prints the sum of all the numbers on the webpage.

@@ -1,3 +1,6 @@
+#Sample problem: Start at http://py4e-data.dr-chuck.net/known_by_Fikret.html
+#Actual problem: Start at: http://py4e-data.dr-chuck.net/known_by_Breandan.html
+
 import urllib.request, urllib.parse, urllib.error
 import ssl
 import re
