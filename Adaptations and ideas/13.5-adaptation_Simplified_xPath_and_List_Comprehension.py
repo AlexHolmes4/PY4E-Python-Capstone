@@ -24,5 +24,5 @@ print("Retrieved", len(byteresp), "characters")
 #parse into ET to otain the paths
 tree = ET.fromstring(byteresp) #fromstring works with class bytes
 
-#find all the count nodes, loop through them and extract the text value, pass into int function and sum the lot with list comprehension.
+#find all the count nodes with xPath, loop through them and extract the text value, pass into int function and sum the lot with list comprehension.
 print(sum([int(i.text) for i in tree.findall('.//count')]))
