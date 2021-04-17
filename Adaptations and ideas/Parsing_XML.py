@@ -1,5 +1,6 @@
 import xml.etree.ElementTree as ET
-input = '''<stuff>
+data = '''
+<stuff>
     <users>
         <user x="2">
             <id>001</id>
@@ -11,13 +12,13 @@ input = '''<stuff>
         </user>
     </users>
 </stuff>'''
-#print("input type:",type(input),"input contains:", input)
-stuff = ET.fromstring(input)
-#print("stuff type:",type(stuff),"stuff contains:", stuff)
-lst = stuff.findall('users/user')
-#print("lst type:",type(lst),"lst contains:", lst)
-print("User count: ", len(lst))
-for item in lst:
-    print('Name', item.find('name').text)
-    print('Id', item.find('id').text)
-    print('Attribute', item.get("x"))
+#print("data type:",type(data),"data contains:", data)
+tree = ET.fromstring(data)
+#print("tree type:",type(tree),"tree contains:", tree)
+users = tree.findall('users/user')
+#print("users type:",type(users),"users contains:", users)
+print("User count: ", len(users))
+for child in users:
+    print('Name', child.find('name').text)
+    print('Id', child.find('id').text)
+    print('Attribute', child.get("x"))
