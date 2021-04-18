@@ -37,7 +37,7 @@ while True:
     except:
         js = None
 
-    if not js or 'status' not in js or js['status'] != 'OK': #user message if failure to create json object occurs
+    if not js or 'status' not in js or js['status'] != 'OK': #helps with debugging and can act as user message
         print('==== Failure To Retrieve ====')
         print(data)
         continue
