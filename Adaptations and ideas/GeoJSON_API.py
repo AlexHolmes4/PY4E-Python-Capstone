@@ -11,7 +11,7 @@ if api_key is False:
     api_key = 42
     serviceurl = 'http://py4e-data.dr-chuck.net/json?'
 else :
-    serviceurl = 'https://maps.googleapis.com/maps/api/geocode/json?'
+    serviceurl = 'https://maps.googleapis.com/maps/api/geocode/json?' #the web server URL to connect to the API
 
 # Ignore SSL certificate errors
 ctx = ssl.create_default_context()
@@ -29,7 +29,7 @@ while True:
 
     print('Retrieving', url)
     uh = urllib.request.urlopen(url, context=ctx) #create webhandle with https ssl certificate failure workaround
-    data = uh.read().decode()
+    data = uh.read().decode() #format as unicode
     print('Retrieved', len(data), 'characters')
 
     try:
