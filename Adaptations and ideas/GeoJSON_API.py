@@ -44,7 +44,7 @@ while True:
 
     print(json.dumps(js, indent=4))
 
-    lat = js['results'][0]['geometry']['location']['lat']
+    lat = js['results'][0]['geometry']['location']['lat'] #there is only 1 item in the array, so ipos 0 is used. 
     lng = js['results'][0]['geometry']['location']['lng']
     print('lat', lat, 'lng', lng)
     location = js['results'][0]['formatted_address']
