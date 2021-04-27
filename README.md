@@ -1,9 +1,13 @@
 "# Python-Repository" 
+![flightdatacrawler High Level Solution](https://user-images.githubusercontent.com/55677663/116178864-d81a0580-a748-11eb-8cce-ed0ca93e058b.PNG)
+![flightdatacrawler High Level Overview](https://user-images.githubusercontent.com/55677663/116178867-d9e3c900-a748-11eb-8f0f-f5dbab3d3708.PNG)
 
 <h1>PY4E - CAPSTONE PROJECT</h1>
 
 <h3>Overview</h3>
 For the final (optional) assignment of the PY4E specalization students were to pick a data source, analyse it and visually represent patterns. I chose <a href = https://academictorrents.com/details/a2ccf94bbb4af222bf8e69dad60a68a29f310d9a> flight data from academic torrents </a>. 
+![flightdatacrawler High Level Solution](https://user-images.githubusercontent.com/55677663/116178864-d81a0580-a748-11eb-8cce-ed0ca93e058b.PNG)
+![flightdatacrawler High Level Overview](https://user-images.githubusercontent.com/55677663/116178867-d9e3c900-a748-11eb-8f0f-f5dbab3d3708.PNG)
 
 <h4>High Level Solution Architecture</h4>
 (https://user-images.githubusercontent.com/55677663/116178403-1b27a900-a748-11eb-92c7-47ad8acc379e.PNG)
