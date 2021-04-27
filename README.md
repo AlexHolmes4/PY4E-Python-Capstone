@@ -1,6 +1,6 @@
 "# Python-Repository" 
 ![flightdatacrawler High Level Solution](https://user-images.githubusercontent.com/55677663/116178864-d81a0580-a748-11eb-8cce-ed0ca93e058b.PNG)
-![flightdatacrawler High Level Overview](https://user-images.githubusercontent.com/55677663/116178867-d9e3c900-a748-11eb-8f0f-f5dbab3d3708.PNG)
+
 
 <h1>PY4E - CAPSTONE PROJECT</h1>
 
@@ -9,11 +9,12 @@
 
 
 <h4>High Level Solution Architecture</h4>
-
+![flightdatacrawler High Level Overview](https://user-images.githubusercontent.com/55677663/116178867-d9e3c900-a748-11eb-8f0f-f5dbab3d3708.PNG)
 
 <ul>
   <li> A python program will run and extract the data into a raw storage database. This first extraction of data is unstructured, the stopping and restarting of data extraction will be incorperated in the python program - SQL query design. </li>
   <li> The data can be processed, modelled and stored into a second structured relational database where querying is optimized. </li>
   <li>This data can now visualized using Javascript. The D3 (Data Driven Documents) Javascript Library was chosen for the visualisation. </li>
  </ul>
- <u>Solution Architecture - Multi Layered Analysis</u>
+ 
+ <h4>Solution Architecture - Multi Layered Analysis</h4>
