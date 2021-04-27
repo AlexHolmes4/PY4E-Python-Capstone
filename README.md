@@ -3,7 +3,7 @@
 <h1>PY4E - CAPSTONE PROJECT</h2>
 
 <h2>Overview</h2>
-For the final (optional) assignment of the PY4E specalization students were to pick a data source, analyse it and visually represent patterns. I chose <a href = https://academictorrents.com/details/a2ccf94bbb4af222bf8e69dad60a68a29f310d9a> flight data from academic torrents </a>.
+For the final (optional) assignment of the PY4E specalization students were to pick a data source, analyse it and visually represent patterns. I chose <a href = https://academictorrents.com/details/a2ccf94bbb4af222bf8e69dad60a68a29f310d9a> flight data from academic torrents </a>. This data was too large to upload to the repository reliably, but you can download from the source link above as a tsv file. 
 
 
 <h3>"High Level Solution Architecture"</h3>
