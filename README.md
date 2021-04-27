@@ -19,3 +19,6 @@ For the final (optional) assignment of the PY4E specalization students were to p
  <h3>Solution Architecture - Multi Layered Analysis</h3>
 
 ![flightdatacrawler High Level Solution](https://user-images.githubusercontent.com/55677663/116178864-d81a0580-a748-11eb-8cce-ed0ca93e058b.PNG)
+
+<h3>Data Model</h3>
+![data model flights](https://user-images.githubusercontent.com/55677663/116188803-93976580-a75a-11eb-9730-d054eab357a9.PNG)
