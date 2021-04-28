@@ -2,14 +2,14 @@ import sqlite3
 import csv
 
 # connect to DB
-conn = sqlite3.connect('flightdatatest.sqlite')
+conn = sqlite3.connect('rawfdata.sqlite')
 cur = conn.cursor()
 
 # set up DB if first time
-cur.execute('''CREATE TABLE IF NOT EXISTS Flights
-    (id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, origin TEXT, destination TEXT,
+cur.execute('''CREATE TABLE IF NOT EXISTS flights_raw
+    (id INTEGER PRIMARY KEY UNIQUE, origin TEXT, destination TEXT,
     origin_city TEXT, destination_city TEXT, passengers INTEGER, seats INTEGER,
-    flights INTEGER, distance INTEGER, fly_date INTEGER, origin_population INTEGER,
+    stops INTEGER, distance INTEGER, fly_date INTEGER, origin_population INTEGER,
     destination_population INTEGER )''')
 
 # open the file for read
@@ -18,7 +18,7 @@ file_content  = csv.reader(file_handle, delimiter="|")
 
 # find last row inserted (if there is one)
 start = None
-cur.execute('SELECT max(id) FROM Flights' )
+cur.execute('SELECT max(id) FROM flights_raw' )
 try:
     row = cur.fetchone()
     if row is None :
@@ -61,8 +61,8 @@ for row in file_content:
         start = start + 1
         insert_count = insert_count +1
         many = many - 1
-        cur.execute('''INSERT OR IGNORE INTO Flights (id, origin, destination, origin_city,
-        destination_city, passengers, seats, flights, distance, fly_date,
+        cur.execute('''INSERT OR IGNORE INTO flights_raw (id, origin, destination, origin_city,
+        destination_city, passengers, seats, stops, distance, fly_date,
         origin_population, destination_population)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''', (start, row[0], row[1], row[2],
         row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10]))
