@@ -17,12 +17,11 @@ cur.execute('''CREATE TABLE IF NOT EXISTS location
          city TEXT UNIQUE)''')
 cur.execute('''CREATE TABLE IF NOT EXISTS demography
         (id INTEGER PRIMARY KEY UNIQUE, population_count INTEGER,
-        date INTEGER, location_id INTEGER)''')
+        date TEXT, location_id INTEGER)''')
 cur.execute('''CREATE TABLE IF NOT EXISTS flight
         (id INTEGER PRIMARY KEY UNIQUE, passengers INTEGER, seats INTEGER,
         stops INTEGER, distance INTEGER, location_id_orig INTEGER,
         location_id_dest INTEGER, demography_id INTEGER)''')
-
 
 
 # the location table is the first to recieve data, as it uses no foreign keys (end of branch)
@@ -84,5 +83,5 @@ while True:
     print("id's retrieved:\n","origin_id:",origin_id, " destination_id:",destination_id, " demography_id:",demography_id)
     count = count + 1
 
-conn.close()
-conn_raw.close()
+cur.close()
+cur_raw.close()
