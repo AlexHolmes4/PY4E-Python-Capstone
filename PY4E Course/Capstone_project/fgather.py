@@ -9,12 +9,12 @@ cur = conn.cursor()
 cur.execute('''CREATE TABLE IF NOT EXISTS flights_raw
     (id INTEGER PRIMARY KEY UNIQUE, origin TEXT, destination TEXT,
     origin_city TEXT, destination_city TEXT, passengers INTEGER, seats INTEGER,
-    stops INTEGER, distance INTEGER, fly_date INTEGER, origin_population INTEGER,
+    stops INTEGER, distance INTEGER, fly_date TEXT, origin_population INTEGER,
     destination_population INTEGER )''')
 
 # open the file for read
-file_handle = open("testdataset.tsv", newline="")
-file_content  = csv.reader(file_handle, delimiter="|")
+file_handle = open("flight_edges.tsv", newline="")
+file_content  = csv.reader(file_handle, delimiter="\t")
 
 # find last row inserted (if there is one)
 start = None
@@ -48,7 +48,6 @@ for row in file_content:
             print("enter a number")
             continue
 
-    row = row[1:-1]
     stripped_row = list()
     for item in row:
         item = item.strip()
@@ -57,23 +56,29 @@ for row in file_content:
 #    print("Retrieved data :",row)
 
     #check to start inserting rows
+    count = 0
     if resume_count == start: #number of rows matches max ID
         start = start + 1
-        insert_count = insert_count +1
+        insert_count = insert_count + 1
         many = many - 1
-        cur.execute('''INSERT OR IGNORE INTO flights_raw (id, origin, destination, origin_city,
-        destination_city, passengers, seats, stops, distance, fly_date,
-        origin_population, destination_population)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''', (start, row[0], row[1], row[2],
-        row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10]))
-        conn.commit()
-        print("Inserted Row")
-
+        try:
+            cur.execute('''INSERT OR IGNORE INTO flights_raw (id, origin, destination, origin_city,
+            destination_city, passengers, seats, stops, distance, fly_date,
+            origin_population, destination_population)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''', (start, row[0], row[1], row[2],
+            row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10]))
+            conn.commit()
+        except KeyboardInterrupt:
+            print('')
+            print('Program interrupted by user...')
+            break
+        if insert_count % 10 == 0:
+            print("inserted 10 rows")
     resume_count = resume_count + 1 #counts number of rows looped through
 
 if insert_count == 0:
     print(insert_count, "rows inserted. No more rows left to insert")
 else:
     print(insert_count,"rows inserted.")
+
 cur.close()
-exit()
