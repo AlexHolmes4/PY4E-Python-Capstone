@@ -34,7 +34,6 @@ if start is None : start = 0
 many = 0
 resume_count = 0  #used to find a point to resume inserting
 insert_count = 0 #counts rows inserted
-fail = 0
 
 #loop through the file rows
 for row in file_content:
@@ -81,4 +80,5 @@ if insert_count == 0:
 else:
     print(insert_count,"rows inserted.")
 
+conn.commit()
 cur.close()
