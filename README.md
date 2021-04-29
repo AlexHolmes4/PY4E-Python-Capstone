@@ -11,7 +11,7 @@ For the final (optional) assignment of the PY4E specalization students were to p
 ![flightdatacrawler High Level Overview](https://user-images.githubusercontent.com/55677663/116178867-d9e3c900-a748-11eb-8f0f-f5dbab3d3708.PNG) 
 
 <ul>
-  <li> A python program will run and extract the data into a raw storage database. This first extraction of data is unstructured, the stopping and restarting of data extraction will be incorperated in the python program - SQL query design. </li>
+  <li> A python program will run and extract the data into a raw storage database. This first extraction of data is unstructured, the stopping and restarting of data extraction will be incorporated in the python program - SQL query design. </li>
   <li> The data can be processed, modelled and stored into a second structured relational database where querying is optimized. </li>
   <li>This data can now visualized using Javascript. The D3 (Data Driven Documents) Javascript Library was chosen for the visualisation. </li>
  </ul>
@@ -23,3 +23,32 @@ For the final (optional) assignment of the PY4E specalization students were to p
 <h3>Data Model</h3>
 
 ![data model flights](https://user-images.githubusercontent.com/55677663/116188803-93976580-a75a-11eb-9730-d054eab357a9.PNG)
+
+<h3>Screenshots of The Process and End Results</h3>
+**First**  `fgather.py` was used to retrieve the data source and insert it into a raw unstructured database (`rawfdata.sqlite`)
+A method to stop and continue retrieving where the program left off was introduced to handle large data retrieval. 
+
+![gather](https://user-images.githubusercontent.com/55677663/116570913-34457b00-a93d-11eb-8413-d66d8a61b127.PNG)
+
+__Next__ the data needed to be restructured, so the raw database was retrieved by `fmodel.py` and inserted into a new relational database, optimized for data retrieval.
+Again a method was introduced to allow the program to pick up from where it left off if interruptions occur. 
+
+![commandline fmodel](https://user-images.githubusercontent.com/55677663/116573106-1da02380-a93f-11eb-8ecd-00fa57580cb4.PNG)
+
+![fstructured DB](https://user-images.githubusercontent.com/55677663/116573869-c2bafc00-a93f-11eb-9404-7708a2a1666e.png)
+
+__Once__ the data was modelled it could be analysed, such as flights frequency plotted on a chart, or visualizing connections between cities.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
