@@ -59,7 +59,7 @@ for (flight_id, flight) in list(flights.items()):             #list snippit [(1,
 date_range_max, date_range_min = max(dates), min(dates)
 sdate_range_max, sdate_range_min = str(date_range_max), str(date_range_min)
 #find average empty seats for dataset
-print(sum(emptyseatscount.values()))
+
 if total_seats_empty > 1:
     avg_empty_seats = (total_seats_empty) / (max(flights.keys()))
 else:
@@ -67,11 +67,11 @@ else:
 
 if DFORMAT == 6:
     print("Loaded flights=",len(flights),"locations=",len(locations),
-    "demographies=",len(demographies),"average-empty-seats=",(avg_empty_seats), "from dates:",
+    "demographies=",len(demographies),"average-empty-seats=",(round(avg_empty_seats,2)), "from dates:",
     (sdate_range_min[:4]+"-"+sdate_range_min[4:]),"->",(sdate_range_max[:4]+"-"+sdate_range_max[4:]))
 else:
     print("Loaded flights=",len(flights),"locations=",len(locations),
-    "demographies=",len(demographies),"average-empty-seats=",(avg_empty_seats), "from dates:",
+    "demographies=",len(demographies),"average-empty-seats=",(round(avg_empty_seats,2)), "from dates:",
     (sdate_range_min+" -> "+sdate_range_max))
 
 
