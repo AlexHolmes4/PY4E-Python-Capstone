@@ -40,9 +40,11 @@ Again a method was introduced to allow the program to pick up from where it left
 
 __Once__ the data was modelled it could be analysed, such as flights frequency plotted on a chart, or visualizing connections between cities.
 
+<h3>Visualising The Data</h3>
+
 ![fbasic](https://user-images.githubusercontent.com/55677663/116577945-838eaa00-a943-11eb-8b81-1c24631ce2c7.PNG)
 
-
+![flight line chart](https://user-images.githubusercontent.com/55677663/116580408-eda84e80-a945-11eb-890b-d2b1e581c62b.PNG)
 
 ![force](https://user-images.githubusercontent.com/55677663/116579991-88545d80-a945-11eb-98b0-04b41eccdf12.PNG)
 
