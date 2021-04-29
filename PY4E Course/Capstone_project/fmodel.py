@@ -8,9 +8,9 @@ conn_raw = sqlite3.connect('file:rawfdata.sqlite?mode=ro', uri=True)
 cur_raw = conn_raw.cursor()
 
 # The flight data model program will start a fresh each time.
-cur.execute('''DROP TABLE IF EXISTS location ''')
-cur.execute('''DROP TABLE IF EXISTS demography ''')
-cur.execute('''DROP TABLE IF EXISTS flight ''')
+#cur.execute('''DROP TABLE IF EXISTS location ''')
+#cur.execute('''DROP TABLE IF EXISTS demography ''')
+#cur.execute('''DROP TABLE IF EXISTS flight ''')
 
 cur.execute('''CREATE TABLE IF NOT EXISTS location
         (id INTEGER PRIMARY KEY UNIQUE, airport_name TEXT UNIQUE,
@@ -23,23 +23,55 @@ cur.execute('''CREATE TABLE IF NOT EXISTS flight
         stops INTEGER, distance INTEGER, location_id_orig INTEGER,
         location_id_dest INTEGER, demography_id INTEGER)''')
 
+#find last modelled row
+resume_count = None
+cur.execute('SELECT max(id) FROM flight')
+try:
+    row = cur.fetchone()
+    if row is None:
+        resume_count = 0
+    else:
+        resume_count = row[0]
+        print("Rows modelled previously:",resume_count,"\nProgram will resume where it left off.\n")
+except:
+    resume_count = 0
 
-# the location table is the first to recieve data, as it uses no foreign keys (end of branch)
-# We handle this with a while loop and two INSERT OR IRGNORE's per iteration, one gatherng the origin the other the destination.
-count = 1
+if resume_count is None: resume_count = 0
+
+#loop through the file rows
+many = 0
+insert_count = 0
 while True:
+    resume_count = resume_count + 1
+    conn.commit()
+    #if iterations specified by user are completed, prompt input
+    if ( many < 1 ) :
+        sval = input('Number of database rows to model:')
+        if ( len(sval) < 1 ) : break
+        try:
+            many = int(sval)
+        except:
+            print("enter a number")
+            continue
+
     # fetch row of raw flight data
     cur_raw.execute('''SELECT origin, destination, origin_city, destination_city, passengers, seats, stops, distance, fly_date,
-    origin_population, destination_population FROM flights_raw WHERE id = ?''', (count, ))
+    origin_population, destination_population FROM flights_raw WHERE id = ?''', (resume_count, ))
     try:
         row = cur_raw.fetchone()
-        print("raw data retrieved for cleaning and modelling:\n",row,'\n')
+    except KeyboardInterrupt:
+        print('')
+        print("Program interrupted by user...")
+        cur.close()
     except:
-        print("location table import complete")
+        print("Modelling complete.")
+        cur.close()
         break
     if row is None:
         print("Modelling complete.")
+        cur.close()
         break
+#                print("raw data retrieved for cleaning and modelling:\n",row,'\n')
 
     # location table
     # insert origin to location table
@@ -48,7 +80,8 @@ while True:
     conn.commit()
     # retrieve the id for the origin location
     cur.execute('SELECT id FROM location WHERE airport_name = ?', (row[0], ))
-    origin_id = cur.fetchone()[0]
+    try: origin_id = cur.fetchone()[0]
+    except: pass #that location not yet inserted, next line will add dest city to ref table - locations
 
     # insert destination to location table
     cur.execute('''INSERT OR IGNORE INTO location (airport_name, city)
@@ -70,7 +103,7 @@ while True:
 
     #retrieve the id for the demography insert
     #only 1 id for the the two (origin, destination) inserts needed as shared date
-    cur.execute('SELECT id FROM demography WHERE id = ?', (count, ))
+    cur.execute('SELECT id FROM demography WHERE id = ?', (resume_count*2, ))
     demography_id = cur.fetchone()[0]
 
     # flight Table
@@ -80,8 +113,18 @@ while True:
     destination_id, demography_id))
     conn.commit()
 
-    print("id's retrieved:\n","origin_id:",origin_id, " destination_id:",destination_id, " demography_id:",demography_id)
-    count = count + 1
+    many = many - 1
+
+    #print("id's retrieved:\n","origin_id:",origin_id, " destination_id:",destination_id, " demography_id:",demography_id)
+    insert_count = insert_count + 1
+    if insert_count % 20 == 0: print("20 more rows inserted")
+    if insert_count % 100 == 0: print("100 more rows inserted")
+    if insert_count % 1000 == 0: print("1000 more rows inserted")
+
+if insert_count == 0:
+    print(insert_count, "rows modelled. No more rows left to model")
+else:
+    print(insert_count, "rows modelled.")
 
 cur.close()
 cur_raw.close()
