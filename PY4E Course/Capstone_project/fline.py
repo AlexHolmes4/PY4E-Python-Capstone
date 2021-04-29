@@ -53,12 +53,13 @@ print(dlocations)
 ocounts = dict()
 dcounts = dict()
 dates = list()
-DFORMAT = 6  #adjust to 4 for year only, and 6 for months
+DFORMAT = 4  #adjust to 4 for year only, and 6 for months
 for (flight_id, flight) in list(flights.items()):
     origin = flight[4]
     destination = flight[5]
     date = flight[6]
-    if date not in dates: dates.append(date[:DFORMAT]) #already sorted by how we extracted data from the database ORDER BY demography.date
+    date = date[:DFORMAT]
+    if date not in dates: dates.append(date) #already sorted by how we extracted data from the database ORDER BY demography.date
     okey = (date, origin)
     dkey = (date, destination)
     ocounts[okey] = ocounts.get(okey, 0) + 1
