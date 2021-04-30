@@ -62,6 +62,7 @@ for row in nodes :
     map[row[2]] = count
     ranks[row[2]] = rank
     count = count + 1
+
 fhand.write('],\n')
 
 
@@ -70,7 +71,6 @@ fhand.write('"links":[\n')
 
 count = 0
 for row in cur :
-    # print row
     if row[0] not in map or row[1] not in map : continue
     if count > 0 : fhand.write(',\n')
     rank = ranks[row[0]]
