@@ -76,8 +76,11 @@ while True:
     # location table
     # insert origin to location table
     cur.execute('''INSERT OR IGNORE INTO location (airport_name, city)
-        VALUES (?, ?)''', (row[0], row[2]))
+        SELECT * FROM (SELECT ?, ?) AS `values`
+        WHERE NOT EXISTS (SELECT ?, ? FROM location WHERE airport_name=? AND city=?)
+        LIMIT 1''', (row[0], row[2], row[0], row[2], row[0], row[2]))
     conn.commit()
+
     # retrieve the id for the origin location
     cur.execute('SELECT id FROM location WHERE airport_name = ?', (row[0], ))
     try: origin_id = cur.fetchone()[0]
@@ -85,7 +88,9 @@ while True:
 
     # insert destination to location table
     cur.execute('''INSERT OR IGNORE INTO location (airport_name, city)
-        VALUES (?, ?)''', (row[1], row[3]))
+        SELECT * FROM (SELECT ?, ?) AS `values`
+        WHERE NOT EXISTS (SELECT ?, ? FROM location WHERE airport_name=? AND city=?)
+        LIMIT 1''', (row[1], row[3], row[1], row[3], row[1], row[3]))
     conn.commit()
     # retrieve the id for the destination location
     cur.execute('SELECT id FROM location WHERE airport_name = ?', (row[1], ))
